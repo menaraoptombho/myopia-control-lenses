@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panduan Kanta Kawalan Rabun Jauh (Myopia Control)</title>
-    <!-- Library PapaParse untuk baca CSV -->
+    <title>Panduan Kanta Kawalan Rabun Jauh</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
         :root { 
             --primary: #0284c7; 
             --bg: #f8fafc; 
             --text: #1e293b; 
-            --accent: #0f766e;
         }
         body { 
             font-family: 'Segoe UI', Arial, sans-serif; 
@@ -32,7 +30,6 @@
         h1 { margin: 0; color: var(--primary); font-size: 2em; }
         p.subtitle { color: #64748b; margin-top: 8px; }
         
-        /* Grid Layout */
         .grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
@@ -46,14 +43,10 @@
             overflow: hidden; 
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s, box-shadow 0.2s; 
+            transition: transform 0.2s; 
         }
-        .card:hover { 
-            transform: translateY(-4px); 
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-        }
+        .card:hover { transform: translateY(-4px); }
         
-        /* Gambar */
         .card-img { 
             width: 100%; 
             height: 200px; 
@@ -62,7 +55,6 @@
             display: block; 
         }
         
-        /* Kandungan Kad */
         .card-content { 
             padding: 20px; 
             display: flex;
@@ -70,34 +62,13 @@
             flex-grow: 1;
         }
         
-        .badge-group {
-            display: flex;
-            gap: 6px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-        .badge { 
-            background: #e0f2fe; 
-            color: #0369a1; 
-            padding: 4px 10px; 
-            border-radius: 20px; 
-            font-size: 0.75em; 
-            font-weight: bold; 
-        }
-        .badge-index {
-            background: #f0fdf4;
-            color: #166534;
-        }
+        .badge-group { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+        .badge { background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: bold; }
+        .badge-index { background: #f0fdf4; color: #166534; }
 
         .card h3 { margin: 0 0 10px 0; color: #0f172a; font-size: 1.25em; }
         
-        /* Maklumat Spesifikasi */
-        .spec-list {
-            margin: 10px 0;
-            font-size: 0.88em;
-            color: #475569;
-            line-height: 1.6;
-        }
+        .spec-list { margin: 10px 0; font-size: 0.88em; color: #475569; line-height: 1.6; }
         .spec-item { margin-bottom: 6px; }
         .spec-label { font-weight: bold; color: #1e293b; }
         
@@ -111,7 +82,7 @@
             border-radius: 0 6px 6px 0;
         }
 
-        #loading { text-align: center; font-size: 1.2em; padding: 4px; color: #64748b; }
+        #loading { text-align: center; font-size: 1.2em; padding: 20px; color: #64748b; }
     </style>
 </head>
 <body>
@@ -126,7 +97,6 @@
     </div>
 
     <script>
-        // Pautan CSV Google Sheets Anda
         const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8UcaieurN6CP7hYle6UQuUUVAuVScZ_ExDvbwpm70PCTwTd9-sYZP06CbxWgHf-vRCxnU3Caj6PXx/pub?output=csv';
 
         function fetchLensData() {
@@ -138,12 +108,16 @@
                     const lenses = results.data;
                     const container = document.getElementById('lens-grid');
                     
-                    lenses.forEach(lens => {
-                        // Membaca lajur 'brand/lens name'
-                        const brandLensName = lens['brand/lens name'];
-                        if(!brandLensName) return; // Langkau jika baris kosong
+                    if (!lenses || lenses.length === 0) {
+                        document.getElementById('loading').innerText = 'Tiada data dijumpai dalam Google Sheets.';
+                        document.getElementById('loading').style.display = 'block';
+                        return;
+                    }
 
-                        // Membaca lajur 'Image URL'
+                    lenses.forEach(lens => {
+                        const brandLensName = lens['brand/lens name'];
+                        if(!brandLensName) return; 
+
                         const imgUrl = (lens['Image URL'] && lens['Image URL'].trim() !== '') 
                             ? lens['Image URL'] 
                             : 'https://via.placeholder.com/400x250?text=Tiada+Gambar';
