@@ -150,6 +150,34 @@
     margin-top:18px;font-size:.82rem;color:rgba(255,255,255,.55);max-width:46ch;
   }
 
+  /* ---------- CONCEPT: PERIPHERAL DEFOCUS DIAGRAM ---------- */
+  .concept-section{background:var(--white);border-bottom:1px solid var(--line);}
+  .eye-diagram-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:44px;
+  }
+  .eye-panel{
+    background:var(--sky);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px 20px 26px;
+  }
+  .eye-panel svg{width:100%;height:150px;}
+  .eye-panel-label{
+    font-family:'IBM Plex Mono',monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--teal);font-weight:500;
+  }
+  .eye-panel h4{font-family:'Fraunces',serif;font-size:1.05rem;margin:4px 0 8px;color:var(--ink);font-weight:600;}
+  .eye-panel p{font-size:.85rem;color:var(--slate-soft);margin:0;}
+  .legend{display:flex;gap:20px;margin:-18px 0 36px;flex-wrap:wrap;font-size:.82rem;color:var(--slate-soft);}
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .legend .dot{width:9px;height:9px;border-radius:50%;flex:none;}
+  .concept-callouts{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:24px;
+    border-top:1px solid var(--line);padding-top:32px;
+  }
+  .callout{display:flex;gap:11px;align-items:flex-start;}
+  .callout .cdot{width:8px;height:8px;border-radius:50%;background:var(--amber);margin-top:6px;flex:none;}
+  .callout h5{font-size:.88rem;color:var(--ink);margin:0 0 4px;font-weight:600;}
+  .callout p{font-size:.82rem;color:var(--slate-soft);margin:0;}
+
   /* ---------- STATS / EFFICACY ---------- */
   .stats{
     background:var(--white);border-bottom:1px solid var(--line);
@@ -292,6 +320,8 @@
     .mech-grid{grid-template-columns:1fr;}
     .foot-grid{grid-template-columns:1fr;}
     section{padding:64px 0;}
+    .eye-diagram-row{grid-template-columns:1fr;}
+    .concept-callouts{grid-template-columns:1fr 1fr;}
   }
 </style>
 </head>
@@ -308,6 +338,7 @@
       </span>
     </a>
     <nav class="links">
+      <a href="#concept">The concept</a>
       <a href="#compare">Compare lenses</a>
       <a href="#how-it-works">How it works</a>
       <a href="#specs">Full specs</a>
@@ -340,6 +371,100 @@
         <circle class="ring" cx="200" cy="200" r="180"/>
         <circle cx="200" cy="200" r="10" fill="#E8A33D"/>
       </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE CONCEPT: PERIPHERAL DEFOCUS ============ -->
+<section id="concept" class="concept-section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The core idea</span>
+      <h2>Why single-vision glasses aren't enough</h2>
+      <p>In a myopic eye, light entering straight ahead can be focused sharply at the centre of the retina — but light entering at an angle often focuses <em style="font-style:italic;">behind</em> the peripheral retina. That mismatch is now understood as a signal that can drive the eye to keep growing, and the myopia to keep worsening.</p>
+    </div>
+
+    <div class="legend">
+      <span><span class="dot" style="background:#E8A33D;"></span> Defocus (out of focus)</span>
+      <span><span class="dot" style="background:#0F6E6E;"></span> In focus</span>
+    </div>
+
+    <div class="eye-diagram-row">
+      <!-- Panel 1: Uncorrected myopia -->
+      <div class="eye-panel">
+        <svg viewBox="0 0 240 160" aria-hidden="true">
+          <circle cx="120" cy="80" r="54" stroke="#D8E3E3" stroke-width="2" fill="none"/>
+          <path d="M168 34 Q182 80 168 126" stroke="#12263A" stroke-opacity=".35" stroke-width="2" fill="none"/>
+          <line x1="18" y1="66" x2="140" y2="80" stroke="#65757D" stroke-width="1.3"/>
+          <line x1="18" y1="94" x2="140" y2="80" stroke="#65757D" stroke-width="1.3"/>
+          <line x1="140" y1="80" x2="205" y2="60" stroke="#65757D" stroke-width="1.3" stroke-dasharray="3 3"/>
+          <line x1="140" y1="80" x2="205" y2="100" stroke="#65757D" stroke-width="1.3" stroke-dasharray="3 3"/>
+          <circle cx="140" cy="80" r="4.5" fill="#E8A33D"/>
+          <line x1="18" y1="26" x2="112" y2="40" stroke="#7FC8C4" stroke-width="1.2"/>
+          <line x1="18" y1="42" x2="112" y2="40" stroke="#7FC8C4" stroke-width="1.2"/>
+          <line x1="112" y1="40" x2="178" y2="24" stroke="#7FC8C4" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <line x1="112" y1="40" x2="178" y2="52" stroke="#7FC8C4" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <circle cx="112" cy="40" r="3.6" fill="#E8A33D"/>
+        </svg>
+        <span class="eye-panel-label">Panel 1</span>
+        <h4>Uncorrected myopia</h4>
+        <p>Both central and edge light focus in front of the retina — the familiar blurry-distance-vision of short-sightedness.</p>
+      </div>
+
+      <!-- Panel 2: Single vision correction -->
+      <div class="eye-panel">
+        <svg viewBox="0 0 240 160" aria-hidden="true">
+          <circle cx="120" cy="80" r="54" stroke="#D8E3E3" stroke-width="2" fill="none"/>
+          <path d="M168 34 Q182 80 168 126" stroke="#12263A" stroke-opacity=".35" stroke-width="2" fill="none"/>
+          <line x1="18" y1="66" x2="168" y2="80" stroke="#65757D" stroke-width="1.3"/>
+          <line x1="18" y1="94" x2="168" y2="80" stroke="#65757D" stroke-width="1.3"/>
+          <circle cx="168" cy="80" r="4.5" fill="#0F6E6E"/>
+          <line x1="18" y1="26" x2="128" y2="40" stroke="#7FC8C4" stroke-width="1.2"/>
+          <line x1="18" y1="42" x2="128" y2="40" stroke="#7FC8C4" stroke-width="1.2"/>
+          <line x1="128" y1="40" x2="178" y2="24" stroke="#7FC8C4" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <line x1="128" y1="40" x2="178" y2="52" stroke="#7FC8C4" stroke-width="1.2" stroke-dasharray="3 3"/>
+          <circle cx="128" cy="40" r="3.6" fill="#E8A33D"/>
+        </svg>
+        <span class="eye-panel-label">Panel 2</span>
+        <h4>Standard single-vision lens</h4>
+        <p>Sharpens the centre perfectly — but light at the edges still lands behind the peripheral retina. That leftover signal is linked to continued eye growth.</p>
+      </div>
+
+      <!-- Panel 3: Myopia control lens -->
+      <div class="eye-panel">
+        <svg viewBox="0 0 240 160" aria-hidden="true">
+          <circle cx="120" cy="80" r="54" stroke="#D8E3E3" stroke-width="2" fill="none"/>
+          <path d="M168 34 Q182 80 168 126" stroke="#12263A" stroke-opacity=".35" stroke-width="2" fill="none"/>
+          <line x1="18" y1="66" x2="168" y2="80" stroke="#65757D" stroke-width="1.3"/>
+          <line x1="18" y1="94" x2="168" y2="80" stroke="#65757D" stroke-width="1.3"/>
+          <circle cx="168" cy="80" r="4.5" fill="#0F6E6E"/>
+          <line x1="18" y1="26" x2="176" y2="26" stroke="#7FC8C4" stroke-width="1.2"/>
+          <line x1="18" y1="42" x2="176" y2="26" stroke="#7FC8C4" stroke-width="1.2"/>
+          <circle cx="176" cy="26" r="3.6" fill="#0F6E6E"/>
+        </svg>
+        <span class="eye-panel-label">Panel 3</span>
+        <h4>Myopia control lens</h4>
+        <p>Corrects the centre <em style="font-style:italic;">and</em> brings edge focus forward onto the peripheral retina — removing the growth signal, not just the blur.</p>
+      </div>
+    </div>
+
+    <div class="concept-callouts">
+      <div class="callout">
+        <span class="cdot"></span>
+        <div><h5>Clear central zone</h5><p>Distance vision stays sharp, just like a regular lens.</p></div>
+      </div>
+      <div class="callout">
+        <span class="cdot"></span>
+        <div><h5>Treatment zones</h5><p>Rings, segments or annular zones create the peripheral myopic defocus signal.</p></div>
+      </div>
+      <div class="callout">
+        <span class="cdot"></span>
+        <div><h5>Preserves normal vision</h5><p>Doesn't alter binocular vision or how the eyes focus up close.</p></div>
+      </div>
+      <div class="callout">
+        <span class="cdot"></span>
+        <div><h5>Works while worn</h5><p>Needs consistent daily wear to keep sending the signal.</p></div>
+      </div>
     </div>
   </div>
 </section>
