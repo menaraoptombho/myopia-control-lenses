@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panduan Kanta Kawalan Rabun Jauh</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <style>
+        :root { --primary: #0284c7; --bg: #f8fafc; --text: #1e293b; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        header { text-align: center; padding: 30px 20px; background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        h1 { margin: 0; color: var(--primary); font-size: 2em; }
+        p.subtitle { color: #64748b; margin-top: 8px; }
+        
+        /* Grid Layout */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: white; border-radius: 10px; border: 1px solid #e2e8f0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); }
+        
+        /* Styling Gambar Card */
+        .card-img { width: 100%; height: 180px; object-fit: cover; background: #e2e8f0; display: block; }
+        .card-content { padding: 20px; }
+        
+        .badge { background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 20px; font-size: 0.8em; font-weight: bold; display: inline-block; margin-bottom: 10px; }
+        .card h3 { margin: 0 0 10px 0; color: #0f172a; }
+        .card p { font-size: 0.9em; color: #475569; line-height: 1.5; margin: 6px 0; }
+        .efficacy { font-weight: bold; color: #16a34a; font-size: 0.85em; margin-top: 12px; }
+        #loading { text-align: center; font-size: 1.2em; padding: 20px; color: #64748b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Panduan Kanta Kawalan Rabun Jauh</h1>
+            <p class="subtitle">Senarai Kanta Myopia Control Terkini Lengkap Dengan Gambar</p>
+        </header>
+
+        <div id="loading">Memuatkan data dari Google Sheets...</div>
+        <div id="lens-grid" class="grid"></div>
+    </div>
+
+    <script>
+        // PASTE URL CSV GOOGLE SHEETS ANDA DI SINI
+        const SHEET_CSV_URL = https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8UcaieurN6CP7hYle6UQuUUVAuVScZ_ExDvbwpm70PCTwTd9-sYZP06CbxWgHf-vRCxnU3Caj6PXx/pub?output=csv;
+
+        function fetchLensData() {
+            Papa.parse(SHEET_CSV_URL, {
+                download: true,
+                header: true,
+                complete: function(results) {
+                    document.getElementById('loading').style.display = 'none';
+                    const lenses = results.data;
+                    const container = document.getElementById('lens-grid');
+                    
+                    lenses.forEach(lens => {
+                        if(!lens.Brand) return; // Skip baris kosong
+                        
+                        // Gambar placeholder jika lajur ImageURL kosong
+                        const imgUrl = (lens.ImageURL && lens.ImageURL.trim() !== '') 
+                            ? lens.ImageURL 
+                            : 'https://via.placeholder.com/400x250?text=Tiada+Gambar';
+
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        card.innerHTML = `
+                            <img src="${imgUrl}" class="card-img" alt="${lens.LensName}" onerror="this.src='https://via.placeholder.com/400x250?text=Gambar+Ralat'">
+                            <div class="card-content">
+                                <span class="badge">${lens.Brand}</span>
+                                <h3>${lens.LensName}</h3>
+                                <p><strong>Teknologi:</strong> ${lens.Technology}</p>
+                                <p>${lens.Description}</p>
+                                <div class="efficacy">✓ Keberkesanan: ${lens.Efficacy}</div>
+                            </div>
+                        `;
+                        container.appendChild(card);
+                    });
+                },
+                error: function(err) {
+                    document.getElementById('loading').innerText = 'Gagal memuatkan data.';
+                }
+            });
+        }
+
+        window.onload = fetchLensData;
+    </script>
+</body>
+</html>
