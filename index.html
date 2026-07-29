@@ -1,158 +1,73 @@
-<!DOCTYPE html>
-<html lang="ms">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panduan Kanta Kawalan Rabun Jauh</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <style>
-        :root { 
-            --primary: #0284c7; 
-            --bg: #f8fafc; 
-            --text: #1e293b; 
-        }
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            margin: 0; 
-            padding: 20px; 
-        }
-        .container { max-width: 1200px; margin: 0 auto; }
-        header { 
-            text-align: center; 
-            padding: 30px 20px; 
-            background: white; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
-            margin-bottom: 30px; 
-        }
-        h1 { margin: 0; color: var(--primary); font-size: 2em; }
-        p.subtitle { color: #64748b; margin-top: 8px; }
-        
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-            gap: 20px; 
-        }
-        .card { 
-            background: white; 
-            border-radius: 12px; 
-            border: 1px solid #e2e8f0; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
-            overflow: hidden; 
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s; 
-        }
-        .card:hover { transform: translateY(-4px); }
-        
-        .card-img { 
-            width: 100%; 
-            height: 200px; 
-            object-fit: cover; 
-            background: #cbd5e1; 
-            display: block; 
-        }
-        
-        .card-content { 
-            padding: 20px; 
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        
-        .badge-group { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-        .badge { background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: bold; }
-        .badge-index { background: #f0fdf4; color: #166534; }
+<script>
+    const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8UcaieurN6CP7hYle6UQuUUVAuVScZ_ExDvbwpm70PCTwTd9-sYZP06CbxWgHf-vRCxnU3Caj6PXx/pub?output=csv';
 
-        .card h3 { margin: 0 0 10px 0; color: #0f172a; font-size: 1.25em; }
-        
-        .spec-list { margin: 10px 0; font-size: 0.88em; color: #475569; line-height: 1.6; }
-        .spec-item { margin-bottom: 6px; }
-        .spec-label { font-weight: bold; color: #1e293b; }
-        
-        .notes-box {
-            background: #f8fafc;
-            border-left: 3px solid var(--primary);
-            padding: 8px 12px;
-            font-size: 0.85em;
-            color: #334155;
-            margin-top: auto;
-            border-radius: 0 6px 6px 0;
-        }
+    function fetchLensData() {
+        Papa.parse(SHEET_CSV_URL, {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                document.getElementById('loading').style.display = 'none';
+                const lenses = results.data;
+                const container = document.getElementById('lens-grid');
 
-        #loading { text-align: center; font-size: 1.2em; padding: 20px; color: #64748b; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Panduan Kanta Kawalan Rabun Jauh</h1>
-            <p class="subtitle">Senarai Spesifikasi & Maklumat Kanta Myopia Control</p>
-        </header>
-
-        <div id="loading">Memuatkan data dari Google Sheets...</div>
-        <div id="lens-grid" class="grid"></div>
-    </div>
-
-    <script>
-        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8UcaieurN6CP7hYle6UQuUUVAuVScZ_ExDvbwpm70PCTwTd9-sYZP06CbxWgHf-vRCxnU3Caj6PXx/pub?output=csv';
-
-        function fetchLensData() {
-            Papa.parse(SHEET_CSV_URL, {
-                download: true,
-                header: true,
-                complete: function(results) {
-                    document.getElementById('loading').style.display = 'none';
-                    const lenses = results.data;
-                    const container = document.getElementById('lens-grid');
-                    
-                    if (!lenses || lenses.length === 0) {
-                        document.getElementById('loading').innerText = 'Tiada data dijumpai dalam Google Sheets.';
-                        document.getElementById('loading').style.display = 'block';
-                        return;
-                    }
-
-                    lenses.forEach(lens => {
-                        const brandLensName = lens['brand/lens name'];
-                        if(!brandLensName) return; 
-
-                        const imgUrl = (lens['Image URL'] && lens['Image URL'].trim() !== '') 
-                            ? lens['Image URL'] 
-                            : 'https://via.placeholder.com/400x250?text=Tiada+Gambar';
-
-                        const card = document.createElement('div');
-                        card.className = 'card';
-                        card.innerHTML = `
-                            <img src="${imgUrl}" class="card-img" alt="${brandLensName}" onerror="this.src='https://via.placeholder.com/400x250?text=Gambar+Ralat'">
-                            <div class="card-content">
-                                <div class="badge-group">
-                                    ${lens['design type'] ? `<span class="badge">${lens['design type']}</span>` : ''}
-                                    ${lens['index'] ? `<span class="badge badge-index">Index: ${lens['index']}</span>` : ''}
-                                </div>
-                                
-                                <h3>${brandLensName}</h3>
-                                
-                                <div class="spec-list">
-                                    ${lens['technology'] ? `<div class="spec-item"><span class="spec-label">Teknologi:</span> ${lens['technology']}</div>` : ''}
-                                    ${lens['option'] ? `<div class="spec-item"><span class="spec-label">Pilihan (Option):</span> ${lens['option']}</div>` : ''}
-                                    ${lens['Rx'] ? `<div class="spec-item"><span class="spec-label">Preskripsi (Rx):</span> ${lens['Rx']}</div>` : ''}
-                                </div>
-
-                                ${lens['notes'] ? `<div class="notes-box"><strong>Nota:</strong> ${lens['notes']}</div>` : ''}
-                            </div>
-                        `;
-                        container.appendChild(card);
-                    });
-                },
-                error: function(err) {
-                    document.getElementById('loading').innerText = 'Gagal memuatkan data. Sila semak semula pautan Google Sheets anda.';
+                if (!lenses || lenses.length === 0) {
+                    document.getElementById('loading').innerText = 'Tiada data dijumpai.';
+                    document.getElementById('loading').style.display = 'block';
+                    return;
                 }
-            });
-        }
 
-        window.onload = fetchLensData;
-    </script>
-</body>
-</html>
+                lenses.forEach(lens => {
+                    // Mencarikan tajuk lajur pertama secara fleksibel (abaikan huruf besar/kecil & jarak)
+                    const keys = Object.keys(lens);
+                    const brandKey = keys.find(k => k.toLowerCase().replace(/\s+/g, '').includes('brand')) || keys[0];
+                    const brandLensName = lens[brandKey];
+
+                    if (!brandLensName || brandLensName.trim() === '') return; 
+
+                    // Cari URL Gambar fleksibel
+                    const imgKey = keys.find(k => k.toLowerCase().includes('image')) || 'Image URL';
+                    const imgUrl = (lens[imgKey] && lens[imgKey].trim() !== '') 
+                        ? lens[imgKey] 
+                        : 'https://via.placeholder.com/400x250?text=Tiada+Gambar';
+
+                    // Cari key yang lain
+                    const designKey = keys.find(k => k.toLowerCase().includes('design')) || 'design type';
+                    const techKey = keys.find(k => k.toLowerCase().includes('tech')) || 'technology';
+                    const indexKey = keys.find(k => k.toLowerCase().includes('index')) || 'index';
+                    const optKey = keys.find(k => k.toLowerCase().includes('opt')) || 'option';
+                    const notesKey = keys.find(k => k.toLowerCase().includes('note')) || 'notes';
+                    const rxKey = keys.find(k => k.toLowerCase().includes('rx')) || 'Rx';
+
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <img src="${imgUrl}" class="card-img" alt="${brandLensName}" onerror="this.src='https://via.placeholder.com/400x250?text=Gambar+Ralat'">
+                        <div class="card-content">
+                            <div class="badge-group">
+                                ${lens[designKey] ? `<span class="badge">${lens[designKey]}</span>` : ''}
+                                ${lens[indexKey] ? `<span class="badge badge-index">Index: ${lens[indexKey]}</span>` : ''}
+                            </div>
+                            
+                            <h3>${brandLensName}</h3>
+                            
+                            <div class="spec-list">
+                                ${lens[techKey] ? `<div class="spec-item"><span class="spec-label">Teknologi:</span> ${lens[techKey]}</div>` : ''}
+                                ${lens[optKey] ? `<div class="spec-item"><span class="spec-label">Pilihan (Option):</span> ${lens[optKey]}</div>` : ''}
+                                ${lens[rxKey] ? `<div class="spec-item"><span class="spec-label">Preskripsi (Rx):</span> ${lens[rxKey]}</div>` : ''}
+                            </div>
+
+                            ${lens[notesKey] ? `<div class="notes-box"><strong>Nota:</strong> ${lens[notesKey]}</div>` : ''}
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            },
+            error: function(err) {
+                document.getElementById('loading').innerText = 'Gagal memuatkan data.';
+            }
+        });
+    }
+
+    window.onload = fetchLensData;
+</script>
