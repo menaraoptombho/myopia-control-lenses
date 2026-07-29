@@ -76,18 +76,18 @@
     color:var(--white);font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;
     text-decoration:none;
   }
-  .brand-mark{width:26px;height:26px;flex:none;}
-  .brand-logo{height:34px;width:auto;flex:none;}
-  .logo-chip{
-    background:var(--white);border-radius:8px;padding:5px 10px;
-    display:inline-flex;align-items:center;flex:none;
+  .brand-mark{width:9px;height:9px;border-radius:50%;background:var(--amber);flex:none;}
+  .brand-text{display:flex;flex-direction:column;line-height:1.15;}
+  .brand-primary{font-family:'Fraunces',serif;font-weight:600;font-size:1.05rem;color:var(--white);}
+  .brand-secondary{
+    font-family:'IBM Plex Mono',monospace;font-size:.62rem;letter-spacing:.12em;
+    text-transform:uppercase;color:var(--teal-light);margin-top:1px;
   }
-  .logo-chip img{height:24px;width:auto;display:block;}
-  .foot-logo-chip{
-    background:var(--white);border-radius:10px;padding:10px 16px;
-    display:inline-flex;align-items:center;margin-bottom:14px;
+  .foot-brand{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.3rem;color:var(--white);
+    display:flex;align-items:center;gap:8px;margin-bottom:12px;
   }
-  .foot-logo-chip img{height:32px;width:auto;display:block;}
+  .foot-brand .brand-mark{width:8px;height:8px;}
   nav.links{display:flex;gap:28px;list-style:none;margin:0;padding:0;}
   nav.links a{
     color:rgba(255,255,255,.82);text-decoration:none;font-size:.92rem;font-weight:500;
@@ -301,8 +301,11 @@
 <header class="site-nav">
   <div class="nav-inner">
     <a class="brand" href="#top">
-      <span class="logo-chip"><img src="images/menara-optometry-logo.jpg" alt="Menara Optometry logo"></span>
-      Myopia Control Lens Guide
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text">
+        <span class="brand-primary">Menara Optometry</span>
+        <span class="brand-secondary">Myopia Control Lens Guide</span>
+      </span>
     </a>
     <nav class="links">
       <a href="#compare">Compare lenses</a>
@@ -509,7 +512,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <span class="foot-logo-chip"><img src="images/menara-optometry-logo.jpg" alt="Menara Optometry logo"></span>
+        <div class="foot-brand"><span class="brand-mark" aria-hidden="true"></span>Menara Optometry</div>
         <p style="font-size:.86rem;max-width:38ch;">
           An independent comparison of currently available myopia control spectacle lenses, built for parents and patients to understand their options before a consultation at Menara Optometry.
         </p>
