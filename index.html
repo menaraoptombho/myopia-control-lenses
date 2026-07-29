@@ -1,176 +1,708 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panduan Kanta Kawalan Rabun Jauh</title>
-    <!-- Library PapaParse -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
-    <style>
-        :root { 
-            --primary: #0284c7; 
-            --bg: #f8fafc; 
-            --text: #1e293b; 
-        }
-        body { 
-            font-family: 'Segoe UI', Arial, sans-serif; 
-            background: var(--bg); 
-            color: var(--text); 
-            margin: 0; 
-            padding: 20px; 
-        }
-        .container { max-width: 1200px; margin: 0 auto; }
-        header { 
-            text-align: center; 
-            padding: 30px 20px; 
-            background: white; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); 
-            margin-bottom: 30px; 
-        }
-        h1 { margin: 0; color: var(--primary); font-size: 2em; }
-        p.subtitle { color: #64748b; margin-top: 8px; }
-        
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
-            gap: 20px; 
-        }
-        .card { 
-            background: white; 
-            border-radius: 12px; 
-            border: 1px solid #e2e8f0; 
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); 
-            overflow: hidden; 
-            display: flex;
-            flex-direction: column;
-            transition: transform 0.2s; 
-        }
-        .card:hover { transform: translateY(-4px); }
-        
-        .card-img { 
-            width: 100%; 
-            height: 200px; 
-            object-fit: cover; 
-            background: #cbd5e1; 
-            display: block; 
-        }
-        
-        .card-content { 
-            padding: 20px; 
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        
-        .badge-group { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
-        .badge { background: #e0f2fe; color: #0369a1; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: bold; }
-        .badge-index { background: #f0fdf4; color: #166534; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menara Optometry — Myopia Control Lens Guide</title>
+<meta name="description" content="Menara Optometry's guide to myopia control spectacle lenses — Essilor Stellest, Hoya MiyoSmart, Zeiss MyoCare, MyoVision Pro, Myopilux and more — design, technology, index and efficacy.">
 
-        .card h3 { margin: 0 0 10px 0; color: #0f172a; font-size: 1.25em; }
-        
-        .spec-list { margin: 10px 0; font-size: 0.88em; color: #475569; line-height: 1.6; }
-        .spec-item { margin-bottom: 6px; }
-        .spec-label { font-weight: bold; color: #1e293b; }
-        
-        .notes-box {
-            background: #f8fafc;
-            border-left: 3px solid var(--primary);
-            padding: 8px 12px;
-            font-size: 0.85em;
-            color: #334155;
-            margin-top: auto;
-            border-radius: 0 6px 6px 0;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-        #loading { text-align: center; font-size: 1.2em; padding: 20px; color: #64748b; }
-    </style>
+<style>
+  :root{
+    --ink:#12263A;
+    --teal:#0F6E6E;
+    --teal-light:#7FC8C4;
+    --sky:#EEF6F6;
+    --amber:#E8A33D;
+    --white:#FFFFFF;
+    --slate:#3B4A54;
+    --slate-soft:#65757D;
+    --line:#D8E3E3;
+    --radius:14px;
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--sky);
+    color:var(--slate);
+    font-family:'Inter',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    color:var(--ink);
+    margin:0 0 .4em 0;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:.14em;
+    font-size:.72rem;
+    color:var(--teal);
+    font-weight:500;
+  }
+  :focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header.site-nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(18,38,58,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;
+    color:var(--white);font-family:'Fraunces',serif;font-weight:600;font-size:1.15rem;
+    text-decoration:none;
+  }
+  .brand-mark{width:26px;height:26px;flex:none;}
+  .brand-logo{height:34px;width:auto;flex:none;}
+  .logo-chip{
+    background:var(--white);border-radius:8px;padding:5px 10px;
+    display:inline-flex;align-items:center;flex:none;
+  }
+  .logo-chip img{height:24px;width:auto;display:block;}
+  .foot-logo-chip{
+    background:var(--white);border-radius:10px;padding:10px 16px;
+    display:inline-flex;align-items:center;margin-bottom:14px;
+  }
+  .foot-logo-chip img{height:32px;width:auto;display:block;}
+  nav.links{display:flex;gap:28px;list-style:none;margin:0;padding:0;}
+  nav.links a{
+    color:rgba(255,255,255,.82);text-decoration:none;font-size:.92rem;font-weight:500;
+    transition:color .15s ease;
+  }
+  nav.links a:hover{color:var(--white);}
+  .nav-cta{
+    background:var(--amber);color:var(--ink);padding:9px 18px;border-radius:999px;
+    font-weight:600;font-size:.88rem;text-decoration:none;white-space:nowrap;
+  }
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:linear-gradient(180deg,var(--ink) 0%, #163449 100%);
+    color:var(--white);
+    padding:96px 0 110px;
+  }
+  .hero-inner{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;
+  }
+  .hero .eyebrow{color:var(--teal-light);}
+  .hero h1{
+    color:var(--white);font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.06;margin-top:10px;
+  }
+  .hero h1 em{
+    font-style:italic;font-weight:400;color:var(--amber);
+  }
+  .hero p.lead{
+    color:rgba(255,255,255,.78);font-size:1.08rem;max-width:46ch;margin-top:16px;
+  }
+  .hero-ctas{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 24px;border-radius:999px;font-weight:600;font-size:.94rem;
+    text-decoration:none;border:1px solid transparent;transition:transform .15s ease, background .15s ease;
+    cursor:pointer;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--amber);color:var(--ink);}
+  .btn-primary:hover{background:#f0b458;}
+  .btn-ghost{background:transparent;color:var(--white);border-color:rgba(255,255,255,.35);}
+  .btn-ghost:hover{background:rgba(255,255,255,.08);}
+
+  /* rings visual — signature element echoing Stellest's 11-ring lenslet design */
+  .rings-visual{position:relative;aspect-ratio:1/1;max-width:420px;margin:0 auto;}
+  .rings-visual svg{width:100%;height:100%;}
+  .ring{fill:none;stroke:rgba(127,200,196,.55);}
+  .ring.accent{stroke:var(--amber);}
+  @keyframes breathe{
+    0%,100%{opacity:.35;}
+    50%{opacity:.85;}
+  }
+  .ring{animation:breathe 6s ease-in-out infinite;}
+  .ring:nth-child(odd){animation-delay:.6s;}
+
+  .hero-note{
+    margin-top:18px;font-size:.82rem;color:rgba(255,255,255,.55);max-width:46ch;
+  }
+
+  /* ---------- STATS / EFFICACY ---------- */
+  .stats{
+    background:var(--white);border-bottom:1px solid var(--line);
+    padding:56px 0;
+  }
+  .stats-head{max-width:60ch;margin-bottom:34px;}
+  .stats-head p{color:var(--slate-soft);}
+  .chart{display:flex;gap:28px;align-items:flex-end;height:220px;padding:0 0 0 0;overflow-x:auto;}
+  .bar-col{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:110px;flex:1;}
+  .bar-value{
+    font-family:'IBM Plex Mono',monospace;font-weight:500;color:var(--ink);margin-bottom:8px;font-size:1.05rem;
+  }
+  .bar{
+    width:52px;border-radius:8px 8px 3px 3px;
+    background:linear-gradient(180deg,var(--teal-light),var(--teal));
+  }
+  .bar-col:nth-child(1) .bar{background:linear-gradient(180deg,#ffd699,var(--amber));}
+  .bar-label{
+    margin-top:12px;font-size:.82rem;color:var(--slate-soft);text-align:center;font-weight:500;
+  }
+  .chart-fine{font-size:.78rem;color:var(--slate-soft);margin-top:22px;}
+
+  /* ---------- SECTION SCAFFOLD ---------- */
+  section{padding:88px 0;}
+  .section-head{max-width:66ch;margin-bottom:44px;}
+  .section-head p{color:var(--slate-soft);font-size:1.02rem;}
+
+  /* ---------- FILTERS ---------- */
+  .filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px;}
+  .filter-btn{
+    background:var(--white);border:1px solid var(--line);color:var(--slate);
+    padding:9px 18px;border-radius:999px;font-size:.86rem;font-weight:500;cursor:pointer;
+    transition:all .15s ease;
+  }
+  .filter-btn:hover{border-color:var(--teal);}
+  .filter-btn.active{background:var(--ink);border-color:var(--ink);color:var(--white);}
+
+  /* ---------- LENS CARDS ---------- */
+  .lens-grid{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:22px;
+  }
+  .lens-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:26px;transition:box-shadow .2s ease, transform .2s ease;
+  }
+  .lens-card:hover{box-shadow:0 12px 28px rgba(18,38,58,.08);transform:translateY(-2px);}
+  .lens-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+  .lens-icon{width:52px;height:52px;flex:none;color:var(--teal);}
+  .lens-brand{
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--teal);font-weight:500;
+  }
+  .lens-name{font-family:'Fraunces',serif;font-size:1.28rem;color:var(--ink);margin:2px 0 0;font-weight:600;}
+  .efficacy-pill{
+    background:var(--sky);border:1px solid var(--line);color:var(--ink);
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;font-weight:500;
+    padding:5px 11px;border-radius:999px;white-space:nowrap;
+  }
+  .lens-design{margin-top:16px;font-size:.93rem;color:var(--slate);}
+  .lens-meta{margin-top:16px;display:grid;gap:8px;font-size:.85rem;}
+  .lens-meta .row{display:flex;gap:8px;}
+  .lens-meta .k{color:var(--slate-soft);min-width:88px;flex:none;}
+  .lens-meta .v{font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--ink);}
+  .lens-note{
+    margin-top:16px;padding-top:14px;border-top:1px dashed var(--line);
+    font-size:.82rem;color:var(--slate-soft);
+  }
+  .img-placeholder{
+    margin-top:16px;height:120px;border-radius:10px;border:1.5px dashed var(--line);
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    color:var(--slate-soft);font-size:.78rem;background:repeating-linear-gradient(135deg, rgba(15,110,110,.03), rgba(15,110,110,.03) 8px, transparent 8px, transparent 16px);
+  }
+
+  /* ---------- MECHANISM SECTION ---------- */
+  .mech-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .mech-card{
+    background:var(--ink);color:var(--white);border-radius:var(--radius);padding:30px;
+  }
+  .mech-card .mech-icon{width:44px;height:44px;color:var(--amber);margin-bottom:16px;}
+  .mech-card h3{color:var(--white);font-size:1.1rem;}
+  .mech-card p{color:rgba(255,255,255,.72);font-size:.9rem;margin:0;}
+
+  /* ---------- SPEC TABLE ---------- */
+  .table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);}
+  table.spec{width:100%;border-collapse:collapse;font-size:.86rem;min-width:820px;}
+  table.spec th, table.spec td{
+    padding:14px 16px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;
+  }
+  table.spec th{
+    font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.06em;
+    font-size:.72rem;color:var(--slate-soft);background:var(--sky);font-weight:500;
+  }
+  table.spec td.brandcell{font-weight:600;color:var(--ink);}
+  table.spec td.mono{font-family:'IBM Plex Mono',monospace;font-size:.8rem;}
+  table.spec tr:last-child td{border-bottom:none;}
+  table.spec tr:hover td{background:#FAFDFD;}
+
+  /* ---------- FAQ ---------- */
+  .faq-item{
+    border-bottom:1px solid var(--line);padding:20px 0;
+  }
+  .faq-item summary{
+    cursor:pointer;font-family:'Fraunces',serif;font-weight:600;color:var(--ink);
+    font-size:1.05rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{
+    content:"+";font-family:'Inter',sans-serif;font-weight:400;font-size:1.4rem;color:var(--teal);flex:none;
+    transition:transform .2s ease;
+  }
+  .faq-item[open] summary::after{transform:rotate(45deg);}
+  .faq-item p{margin:12px 0 0;color:var(--slate-soft);font-size:.94rem;max-width:70ch;}
+
+  /* ---------- CTA BAND ---------- */
+  .cta-band{
+    background:linear-gradient(120deg,var(--teal),#0b5555);
+    color:var(--white);border-radius:20px;padding:52px;
+    display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap;
+  }
+  .cta-band h2{color:var(--white);margin:0;}
+  .cta-band p{color:rgba(255,255,255,.82);margin:8px 0 0;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink);color:rgba(255,255,255,.65);padding:56px 0 32px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:32px;margin-bottom:36px;}
+  footer h4{color:var(--white);font-size:.95rem;font-family:'Inter',sans-serif;font-weight:600;}
+  footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px;font-size:.88rem;}
+  footer a{text-decoration:none;color:rgba(255,255,255,.65);}
+  footer a:hover{color:var(--white);}
+  .foot-bottom{
+    border-top:1px solid rgba(255,255,255,.1);padding-top:22px;
+    font-size:.78rem;color:rgba(255,255,255,.45);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:860px){
+    nav.links{display:none;}
+    .hero-inner{grid-template-columns:1fr;}
+    .rings-visual{max-width:280px;}
+    .mech-grid{grid-template-columns:1fr;}
+    .foot-grid{grid-template-columns:1fr;}
+    section{padding:64px 0;}
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Panduan Kanta Kawalan Rabun Jauh</h1>
-            <p class="subtitle">Senarai Spesifikasi & Maklumat Kanta Myopia Control</p>
-        </header>
 
-        <div id="loading">Memuatkan data dari Google Sheets...</div>
-        <div id="lens-grid" class="grid"></div>
+<!-- ============ NAV ============ -->
+<header class="site-nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <span class="logo-chip"><img src="images/menara-optometry-logo.jpg" alt="Menara Optometry logo"></span>
+      Myopia Control Lens Guide
+    </a>
+    <nav class="links">
+      <a href="#compare">Compare lenses</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#specs">Full specs</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Book a consult</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <div>
+      <span class="eyebrow">Myopia Control · Optical Lens Guide</span>
+      <h1>Myopia doesn't have to keep <em>progressing.</em></h1>
+      <p class="lead">Compare the design, technology and clinical efficacy behind today's leading myopia control spectacle lenses — Essilor, Hoya and Zeiss — side by side, in plain language.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#compare">Compare lenses ↓</a>
+        <a class="btn btn-ghost" href="#contact">Book a consultation</a>
+      </div>
+      <p class="hero-note">Efficacy figures reflect manufacturer-reported clinical study data and may vary by individual. Always confirm suitability with a qualified eye care practitioner.</p>
+    </div>
+    <div class="rings-visual" aria-hidden="true">
+      <svg viewBox="0 0 400 400">
+        <circle class="ring" cx="200" cy="200" r="30"/>
+        <circle class="ring" cx="200" cy="200" r="60"/>
+        <circle class="ring" cx="200" cy="200" r="90"/>
+        <circle class="ring accent" cx="200" cy="200" r="120"/>
+        <circle class="ring" cx="200" cy="200" r="150"/>
+        <circle class="ring" cx="200" cy="200" r="180"/>
+        <circle cx="200" cy="200" r="10" fill="#E8A33D"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EFFICACY CHART ============ -->
+<section class="stats" id="efficacy" style="padding-top:56px;">
+  <div class="wrap">
+    <div class="stats-head">
+      <span class="eyebrow">Reported clinical efficacy</span>
+      <h2>How much can these lenses slow progression?</h2>
+      <p>Percentage reduction in myopia progression versus single-vision lenses, as reported in each manufacturer's clinical studies.</p>
+    </div>
+    <div class="chart">
+      <div class="bar-col">
+        <span class="bar-value">67%</span>
+        <div class="bar" style="height:170px;"></div>
+        <span class="bar-label">Essilor<br>Stellest</span>
+      </div>
+      <div class="bar-col">
+        <span class="bar-value">60%</span>
+        <div class="bar" style="height:152px;"></div>
+        <span class="bar-label">Hoya<br>MiyoSmart</span>
+      </div>
+      <div class="bar-col">
+        <span class="bar-value">51%</span>
+        <div class="bar" style="height:129px;"></div>
+        <span class="bar-label">Essilor<br>Myopilux Max</span>
+      </div>
+      <div class="bar-col">
+        <span class="bar-value">37%</span>
+        <div class="bar" style="height:94px;"></div>
+        <span class="bar-label">Essilor<br>Myopilux Plus</span>
+      </div>
+    </div>
+    <p class="chart-fine">Zeiss MyoCare, MyoVision Pro and Advance Kids figures are available on request — study designs differ between brands, so figures are not always directly comparable. This chart is for general orientation only.</p>
+  </div>
+</section>
+
+<!-- ============ COMPARE LENSES ============ -->
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Compare</span>
+      <h2>Seven lenses, seven approaches</h2>
+      <p>Every brand slows myopia through a different optical mechanism. Filter by manufacturer, or scroll through all of them below.</p>
     </div>
 
-    <script>
-        const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8UcaieurN6CP7hYle6UQuUUVAuVScZ_ExDvbwpm70PCTwTd9-sYZP06CbxWgHf-vRCxnU3Caj6PXx/pub?output=csv';
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="all">All lenses</button>
+      <button class="filter-btn" data-filter="Essilor">Essilor</button>
+      <button class="filter-btn" data-filter="Hoya">Hoya</button>
+      <button class="filter-btn" data-filter="Zeiss">Zeiss</button>
+      <button class="filter-btn" data-filter="Advance">Advance</button>
+    </div>
 
-        function fetchLensData() {
-            Papa.parse(SHEET_CSV_URL, {
-                download: true,
-                header: true,
-                skipEmptyLines: true,
-                complete: function(results) {
-                    document.getElementById('loading').style.display = 'none';
-                    const lenses = results.data;
-                    const container = document.getElementById('lens-grid');
+    <div class="lens-grid" id="lensGrid">
+      <!-- cards injected by JS from LENS_DATA below -->
+    </div>
+  </div>
+</section>
 
-                    if (!lenses || lenses.length === 0) {
-                        document.getElementById('loading').innerText = 'Tiada data dijumpai.';
-                        document.getElementById('loading').style.display = 'block';
-                        return;
-                    }
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how-it-works" style="background:var(--white);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">The science, simplified</span>
+      <h2>Three ways a lens can slow eye growth</h2>
+      <p>Despite different names, most myopia control lenses work by reshaping how light focuses at the edges of the retina, not just the centre.</p>
+    </div>
+    <div class="mech-grid">
+      <div class="mech-card">
+        <svg class="mech-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="6" stroke="#E8A33D" stroke-width="2"/><circle cx="24" cy="24" r="14" stroke="#7FC8C4" stroke-width="2"/><circle cx="24" cy="24" r="21" stroke="#7FC8C4" stroke-width="2"/></svg>
+        <h3>Ring &amp; lenslet arrays</h3>
+        <p>Hundreds of tiny aspherical lenslets, arranged in concentric rings around a clear central zone, create a controlled myopic defocus signal at the peripheral retina. Used by Essilor Stellest.</p>
+      </div>
+      <div class="mech-card">
+        <svg class="mech-icon" viewBox="0 0 48 48" fill="none">
+          <polygon points="24,6 34,12 34,24 24,30 14,24 14,12" stroke="#E8A33D" stroke-width="2"/>
+          <polygon points="10,20 18,25 18,35 10,40 2,35 2,25" stroke="#7FC8C4" stroke-width="2"/>
+          <polygon points="38,20 46,25 46,35 38,40 30,35 30,25" stroke="#7FC8C4" stroke-width="2"/>
+        </svg>
+        <h3>Honeycomb defocus segments</h3>
+        <p>A honeycomb grid of small myopic-defocus segments surrounds a clear central optical zone for distance vision. Used in Hoya MiyoSmart's D.I.M.S. design.</p>
+      </div>
+      <div class="mech-card">
+        <svg class="mech-icon" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="9" stroke="#E8A33D" stroke-width="2"/>
+          <path d="M24 4 a20 20 0 0 1 0 40" stroke="#7FC8C4" stroke-width="2" fill="none"/>
+          <path d="M24 4 a20 20 0 0 0 0 40" stroke="#7FC8C4" stroke-width="2" stroke-dasharray="3 4" fill="none"/>
+        </svg>
+        <h3>Cylindrical annular zones</h3>
+        <p>Concentric annular zones with cylindrical power reshape peripheral focus while keeping the central zone clear. Used in Zeiss MyoCare's C.A.R.E. technology.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-                    lenses.forEach(lens => {
-                        const keys = Object.keys(lens);
-                        if (keys.length === 0) return;
+<!-- ============ FULL SPEC TABLE ============ -->
+<section id="specs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Reference</span>
+      <h2>Full specification sheet</h2>
+      <p>Index, prescription range and available finishes for every lens, at a glance.</p>
+    </div>
+    <div class="table-scroll">
+      <table class="spec" id="specTable">
+        <thead>
+          <tr>
+            <th>Lens</th>
+            <th>Design</th>
+            <th>Index</th>
+            <th>Options / finishes</th>
+            <th>Rx range</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody><!-- injected by JS --></tbody>
+      </table>
+    </div>
+  </div>
+</section>
 
-                        // Baca tajuk lajur pertama secara automatik (apa-apa ejaan)
-                        const brandKey = keys.find(k => k.toLowerCase().replace(/\s+/g, '').includes('brand')) || keys[0];
-                        const brandLensName = lens[brandKey];
+<!-- ============ FAQ ============ -->
+<section id="faq" style="background:var(--white);border-top:1px solid var(--line);">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Questions</span>
+      <h2>Frequently asked</h2>
+    </div>
+    <div style="max-width:800px;">
+      <details class="faq-item" open>
+        <summary>What age can a child start on a myopia control lens?</summary>
+        <p>Most designs are suitable from around age 6–8 once a child can be fitted and measured accurately, though some ranges (like Zeiss MyoCare) offer age-specific versions. Your optometrist will confirm the right fit and timing.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do these lenses need to be worn all day?</summary>
+        <p>Manufacturer data for lenses like Stellest and MiyoSmart is based on a minimum of around 12 hours of daily wear. Consistent, full-time wear is generally what clinical efficacy figures assume.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can these lenses be combined with blue light or photochromic coatings?</summary>
+        <p>Yes — most ranges here offer a clear option, a blue-light-filtering option, and in some cases photochromic finishes (such as Sensity, Tinted Sunbird, or Photofusion).</p>
+      </details>
+      <details class="faq-item">
+        <summary>Which lens is "the best" one?</summary>
+        <p>There isn't a single best lens for every child — the right choice depends on prescription, age, lifestyle and how the eyes respond over time. This page is a starting point for comparison; a proper fitting and follow-up with an eye care practitioner is what determines suitability.</p>
+      </details>
+    </div>
+  </div>
+</section>
 
-                        if (!brandLensName || brandLensName.trim() === '') return; 
+<!-- ============ CTA ============ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="cta-band">
+      <div>
+        <h2>Not sure which lens fits your child?</h2>
+        <p>Bring their latest prescription in for a fitting and a proper comparison in person.</p>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a class="btn btn-primary" href="tel:+60390746136">Call / WhatsApp 03-9074 6136</a>
+        <a class="btn btn-ghost" href="https://wa.me/60390746136" style="border-color:rgba(255,255,255,.5);">WhatsApp us</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-                        // Baca gambar
-                        const imgKey = keys.find(k => k.toLowerCase().includes('image')) || '';
-                        const imgUrl = (imgKey && lens[imgKey] && lens[imgKey].trim() !== '') 
-                            ? lens[imgKey] 
-                            : 'https://via.placeholder.com/400x250?text=Tiada+Gambar';
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span class="foot-logo-chip"><img src="images/menara-optometry-logo.jpg" alt="Menara Optometry logo"></span>
+        <p style="font-size:.86rem;max-width:38ch;">
+          An independent comparison of currently available myopia control spectacle lenses, built for parents and patients to understand their options before a consultation at Menara Optometry.
+        </p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#compare">Compare lenses</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#specs">Full specs</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li>No 14, Jalan Suadamai 1/2,<br>Bandar Tun Hussein Onn,<br>43200 Cheras, Selangor</li>
+          <li><a href="tel:+60390746136">03-9074 6136</a> (Tel / WhatsApp)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© <span id="year"></span> Menara Optometry. For information purposes only — not a substitute for professional eye care advice.</span>
+      <span>Brand names are trademarks of their respective owners.</span>
+    </div>
+  </div>
+</footer>
 
-                        // Baca kunci-kunci lain
-                        const designKey = keys.find(k => k.toLowerCase().includes('design')) || '';
-                        const techKey = keys.find(k => k.toLowerCase().includes('tech')) || '';
-                        const indexKey = keys.find(k => k.toLowerCase().includes('index')) || '';
-                        const optKey = keys.find(k => k.toLowerCase().includes('opt')) || '';
-                        const notesKey = keys.find(k => k.toLowerCase().includes('note')) || '';
-                        const rxKey = keys.find(k => k.toLowerCase().includes('rx')) || '';
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-                        const card = document.createElement('div');
-                        card.className = 'card';
-                        card.innerHTML = `
-                            <img src="${imgUrl}" class="card-img" alt="${brandLensName}" onerror="this.src='https://via.placeholder.com/400x250?text=Gambar+Ralat'">
-                            <div class="card-content">
-                                <div class="badge-group">
-                                    ${(designKey && lens[designKey]) ? `<span class="badge">${lens[designKey]}</span>` : ''}
-                                    ${(indexKey && lens[indexKey]) ? `<span class="badge badge-index">Index: ${lens[indexKey]}</span>` : ''}
-                                </div>
-                                
-                                <h3>${brandLensName}</h3>
-                                
-                                <div class="spec-list">
-                                    ${(techKey && lens[techKey]) ? `<div class="spec-item"><span class="spec-label">Teknologi:</span> ${lens[techKey]}</div>` : ''}
-                                    ${(optKey && lens[optKey]) ? `<div class="spec-item"><span class="spec-label">Pilihan (Option):</span> ${lens[optKey]}</div>` : ''}
-                                    ${(rxKey && lens[rxKey]) ? `<div class="spec-item"><span class="spec-label">Preskripsi (Rx):</span> ${lens[rxKey]}</div>` : ''}
-                                </div>
+  /* =========================================================
+     LENS DATA
+     Sourced from internal product comparison sheet.
+     Fields left blank in the original sheet are shown as "—".
+     To add a product photo later: replace the .img-placeholder
+     div inside renderCard() with:
+       <img src="images/your-file.jpg" alt="[Lens name]">
+     ========================================================= */
+  const LENS_DATA = [
+    {
+      brand: "Essilor",
+      name: "Stellest",
+      icon: "rings",
+      design: "Progressive multifocus design with 1,021 aspherical lenslets arranged across 11 concentric rings, around a 9mm clear central zone.",
+      technology: "H.A.L.T. — Highly Aspherical Lenslet Technology",
+      index: "1.59 polycarbonate",
+      options: "Clear · Clear with blue light filter",
+      rx: "Contact us for available range",
+      efficacy: "67% efficacy*",
+      note: "Recommended minimum wear: 12 hours/day for full effect."
+    },
+    {
+      brand: "Hoya",
+      name: "MiyoSmart",
+      icon: "honeycomb",
+      design: "396 honeycomb-shaped defocus lenslets, each with a +3.50D power addition, surrounding a clear central optical zone.",
+      technology: "D.I.M.S. — Defocus Incorporated Multiple Segments",
+      index: "1.59 polycarbonate",
+      options: "Clear · Clear with blue light filter · Sensity (photochromic) · Tinted Sunbird",
+      rx: "Plano to −13.00 DS / up to −4.00 DC",
+      efficacy: "60% efficacy*",
+      note: "Recommended minimum wear: 12 hours/day for full effect."
+    },
+    {
+      brand: "Essilor",
+      name: "Myopilux Plus",
+      icon: "gradient",
+      design: "Progressive addition lens design that reduces near-vision accommodative stress.",
+      technology: "Progressive addition optics",
+      index: "1.50 · 1.59 · 1.60 · 1.67",
+      options: "Clear with blue light filter",
+      rx: "Plano to −8.00 DS / up to −4.00 DC · max cyl. power −8.00",
+      efficacy: "37% efficacy*",
+      note: "Best suited to esophoric patients — your optometrist can confirm suitability."
+    },
+    {
+      brand: "Essilor",
+      name: "Myopilux Max",
+      icon: "bifocal",
+      design: "Flat-top bifocal design with clearly separated distance and near viewing zones.",
+      technology: "Bifocal segment optics",
+      index: "1.59 polycarbonate",
+      options: "Clear with blue light filter",
+      rx: "Plano to −8.00 DS / up to −4.00 DC · max cyl. power −8.00",
+      efficacy: "51% efficacy*",
+      note: "A visible dividing line is present on the lens."
+    },
+    {
+      brand: "Zeiss",
+      name: "MyoCare",
+      icon: "zone",
+      design: "MyoCare (under 10 y/o): 7mm central optical zone, +4.6D addition. MyoCare S (10+ y/o): 9mm central clear zone, +3.8D addition.",
+      technology: "C.A.R.E. — Cylindrical Annular Refractive Elements",
+      index: "1.59 · 1.60 · 1.67",
+      options: "Clear · Clear with blue light filter",
+      rx: "Available on request",
+      efficacy: "Efficacy data on file",
+      note: "Two age-specific versions available — MyoCare and MyoCare S."
+    },
+    {
+      brand: "Zeiss",
+      name: "MyoVision Pro",
+      icon: "zone",
+      design: "Peripheral defocus lens design for everyday myopia management.",
+      technology: "Peripheral defocus optics",
+      index: "1.50 · 1.60 · 1.67",
+      options: "Clear · Clear with blue light filter · Photofusion (photochromic)",
+      rx: "Available on request",
+      efficacy: "Efficacy data on file",
+      note: "—"
+    },
+    {
+      brand: "Advance",
+      name: "Kids Myopia Control 2",
+      icon: "add",
+      design: "Addition lens design with power addition ranging from +0.50 to +2.00.",
+      technology: "Addition lens optics",
+      index: "Available on request",
+      options: "Available on request",
+      rx: "Available on request",
+      efficacy: "Efficacy data on file",
+      note: "Ask us for the full specification sheet for this range."
+    }
+  ];
 
-                                ${(notesKey && lens[notesKey]) ? `<div class="notes-box"><strong>Nota:</strong> ${lens[notesKey]}</div>` : ''}
-                            </div>
-                        `;
-                        container.appendChild(card);
-                    });
-                },
-                error: function(err) {
-                    document.getElementById('loading').innerText = 'Gagal memuatkan data dari Google Sheets.';
-                }
-            });
-        }
+  const ICONS = {
+    rings: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="24" r="10" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.6"/></svg>`,
+    honeycomb: `<svg viewBox="0 0 48 48" fill="none"><polygon points="24,5 33,10.5 33,21.5 24,27 15,21.5 15,10.5" stroke="currentColor" stroke-width="1.6"/><polygon points="9,20 18,25.5 18,36.5 9,42 0,36.5 0,25.5" stroke="currentColor" stroke-width="1.6"/><polygon points="39,20 48,25.5 48,36.5 39,42 30,36.5 30,25.5" stroke="currentColor" stroke-width="1.6"/></svg>`,
+    gradient: `<svg viewBox="0 0 48 48" fill="none"><path d="M6 34 C 14 18, 34 18, 42 34" stroke="currentColor" stroke-width="1.6"/><path d="M10 38 C 17 26, 31 26, 38 38" stroke="currentColor" stroke-width="1.6"/><circle cx="24" cy="14" r="4" stroke="currentColor" stroke-width="1.6"/></svg>`,
+    bifocal: `<svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="4" stroke="currentColor" stroke-width="1.6"/><line x1="6" y1="28" x2="42" y2="28" stroke="currentColor" stroke-width="1.6"/><path d="M14 28 a4 4 0 0 1 8 0" stroke="currentColor" stroke-width="1.6"/><path d="M26 28 a4 4 0 0 1 8 0" stroke="currentColor" stroke-width="1.6"/></svg>`,
+    zone: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="8" stroke="currentColor" stroke-width="1.6"/><path d="M24 4 a20 20 0 0 1 0 40" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M24 4 a20 20 0 0 0 0 40" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3 3" fill="none"/></svg>`,
+    add: `<svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.6"/><line x1="24" y1="15" x2="24" y2="33" stroke="currentColor" stroke-width="1.6"/><line x1="15" y1="24" x2="33" y2="24" stroke="currentColor" stroke-width="1.6"/></svg>`
+  };
 
-        window.onload = fetchLensData;
-    </script>
+  function renderCard(lens){
+    return `
+      <article class="lens-card" data-brand="${lens.brand}">
+        <div class="lens-top">
+          <div>
+            <span class="lens-brand">${lens.brand}</span>
+            <h3 class="lens-name">${lens.name}</h3>
+          </div>
+          <div class="lens-icon">${ICONS[lens.icon]}</div>
+        </div>
+        <span class="efficacy-pill">${lens.efficacy}</span>
+        <p class="lens-design">${lens.design}</p>
+        <div class="lens-meta">
+          <div class="row"><span class="k">Technology</span><span class="v">${lens.technology}</span></div>
+          <div class="row"><span class="k">Index</span><span class="v">${lens.index}</span></div>
+          <div class="row"><span class="k">Options</span><span class="v">${lens.options}</span></div>
+          <div class="row"><span class="k">Rx range</span><span class="v">${lens.rx}</span></div>
+        </div>
+        <div class="lens-note">${lens.note}</div>
+        <div class="img-placeholder" data-image-slot="${lens.brand.toLowerCase()}-${lens.name.toLowerCase().replace(/\\s+/g,'-')}.jpg">
+          <span>🖼 Product image — to be added</span>
+        </div>
+      </article>
+    `;
+  }
+
+  function renderRow(lens){
+    return `
+      <tr data-brand="${lens.brand}">
+        <td class="brandcell">${lens.brand} ${lens.name}</td>
+        <td>${lens.design}</td>
+        <td class="mono">${lens.index}</td>
+        <td>${lens.options}</td>
+        <td class="mono">${lens.rx}</td>
+        <td>${lens.note === "—" ? lens.efficacy : lens.efficacy + " — " + lens.note}</td>
+      </tr>
+    `;
+  }
+
+  const grid = document.getElementById('lensGrid');
+  const tbody = document.querySelector('#specTable tbody');
+  grid.innerHTML = LENS_DATA.map(renderCard).join('');
+  tbody.innerHTML = LENS_DATA.map(renderRow).join('');
+
+  document.getElementById('filters').addEventListener('click', (e)=>{
+    const btn = e.target.closest('.filter-btn');
+    if(!btn) return;
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.lens-card').forEach(card=>{
+      card.style.display = (f === 'all' || card.dataset.brand === f) ? '' : 'none';
+    });
+    document.querySelectorAll('#specTable tbody tr').forEach(row=>{
+      row.style.display = (f === 'all' || row.dataset.brand === f) ? '' : 'none';
+    });
+  });
+</script>
+
 </body>
 </html>
