@@ -673,14 +673,19 @@
      LENS DATA
      Sourced from internal product comparison sheet.
      Fields left blank in the original sheet are shown as "—".
-     To add a product photo later: replace the .img-placeholder
-     div inside renderCard() with:
-       <img src="images/your-file.jpg" alt="[Lens name]">
+
+     TO ADD A PRODUCT PHOTO:
+     1) Upload the image file to the repo (same folder as index.html).
+     2) Fill in the "image" line below with the exact file name,
+        e.g.  image: "stellest.jpg",
+     3) Leave it as  image: "",  if you don't have a photo yet —
+        the card will keep showing the placeholder box automatically.
      ========================================================= */
   const LENS_DATA = [
     {
       brand: "Essilor",
       name: "Stellest",
+      image: "",
       icon: "rings",
       design: "Progressive multifocus design with 1,021 aspherical lenslets arranged across 11 concentric rings, around a 9mm clear central zone.",
       technology: "H.A.L.T. — Highly Aspherical Lenslet Technology",
@@ -693,6 +698,7 @@
     {
       brand: "Hoya",
       name: "MiyoSmart",
+      image: "",
       icon: "honeycomb",
       design: "396 honeycomb-shaped defocus lenslets, each with a +3.50D power addition, surrounding a clear central optical zone.",
       technology: "D.I.M.S. — Defocus Incorporated Multiple Segments",
@@ -705,6 +711,7 @@
     {
       brand: "Essilor",
       name: "Myopilux Plus",
+      image: "",
       icon: "gradient",
       design: "Progressive addition lens design that reduces near-vision accommodative stress.",
       technology: "Progressive addition optics",
@@ -717,6 +724,7 @@
     {
       brand: "Essilor",
       name: "Myopilux Max",
+      image: "",
       icon: "bifocal",
       design: "Flat-top bifocal design with clearly separated distance and near viewing zones.",
       technology: "Bifocal segment optics",
@@ -729,6 +737,7 @@
     {
       brand: "Zeiss",
       name: "MyoCare",
+      image: "",
       icon: "zone",
       design: "MyoCare (under 10 y/o): 7mm central optical zone, +4.6D addition. MyoCare S (10+ y/o): 9mm central clear zone, +3.8D addition.",
       technology: "C.A.R.E. — Cylindrical Annular Refractive Elements",
@@ -741,6 +750,7 @@
     {
       brand: "Zeiss",
       name: "MyoVision Pro",
+      image: "",
       icon: "zone",
       design: "Peripheral defocus lens design for everyday myopia management.",
       technology: "Peripheral defocus optics",
@@ -753,6 +763,7 @@
     {
       brand: "Advance",
       name: "Kids Myopia Control 2",
+      image: "",
       icon: "add",
       design: "Addition lens design with power addition ranging from +0.50 to +2.00.",
       technology: "Addition lens optics",
@@ -774,6 +785,9 @@
   };
 
   function renderCard(lens){
+    const photoBlock = lens.image && lens.image.trim() !== ""
+      ? `<img src="${lens.image}" alt="${lens.brand} ${lens.name} lens" style="margin-top:16px;border-radius:10px;width:100%;height:180px;object-fit:cover;">`
+      : `<div class="img-placeholder"><span>🖼 Product image — to be added</span></div>`;
     return `
       <article class="lens-card" data-brand="${lens.brand}">
         <div class="lens-top">
@@ -792,9 +806,7 @@
           <div class="row"><span class="k">Rx range</span><span class="v">${lens.rx}</span></div>
         </div>
         <div class="lens-note">${lens.note}</div>
-        <div class="img-placeholder" data-image-slot="${lens.brand.toLowerCase()}-${lens.name.toLowerCase().replace(/\\s+/g,'-')}.jpg">
-          <span>🖼 Product image — to be added</span>
-        </div>
+        ${photoBlock}
       </article>
     `;
   }
